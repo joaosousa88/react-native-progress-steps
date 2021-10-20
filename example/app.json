@@ -1,0 +1,22 @@
+{
+  "name": "@joaosousa/react-native-progress-steps-example",
+  "displayName": "ReactNativeProgressSteps Example",
+  "expo": {
+    "name": "@joaosousa/react-native-progress-steps-example",
+    "slug": "joaosousa-react-native-progress-steps-example",
+    "description": "Example app for @joaosousa/react-native-progress-steps",
+    "privacy": "public",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
