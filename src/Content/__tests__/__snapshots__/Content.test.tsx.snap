@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Title should render Title 1`] = `
+<View
+  pointerEvents="auto"
+  style={
+    Object {
+      "height": 0,
+      "opacity": 1,
+      "overflow": "hidden",
+      "paddingBottom": 20,
+      "paddingLeft": 5,
+    }
+  }
+>
+  <View
+    onLayout={[Function]}
+    style={
+      Object {
+        "position": "absolute",
+      }
+    }
+  >
+    <Text>
+      Hello content
+    </Text>
+  </View>
+</View>
+`;

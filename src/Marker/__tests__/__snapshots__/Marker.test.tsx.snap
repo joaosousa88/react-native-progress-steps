@@ -1,0 +1,132 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Marker should render Marker 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "borderColor": "black",
+        "borderRadius": 20,
+        "borderWidth": 4,
+        "fontSize": 1,
+        "height": 40,
+        "justifyContent": "center",
+        "position": "relative",
+        "width": 40,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "rgba(0, 0, 0, 1)",
+          "fontWeight": "bold",
+          "position": "relative",
+          "zIndex": 1,
+        }
+      }
+    >
+      0
+    </Text>
+    <View
+      style={
+        Object {
+          "backgroundColor": "black",
+          "borderRadius": 20,
+          "height": 40,
+          "position": "absolute",
+          "transform": Array [
+            Object {
+              "scale": 0,
+            },
+          ],
+          "width": 40,
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "alignSelf": "center",
+        "backgroundColor": "gray",
+        "flex": 1,
+        "position": "relative",
+        "width": 4,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "backgroundColor": "black",
+          "height": "0%",
+          "width": 4,
+        }
+      }
+    />
+  </View>
+</View>
+`;
+
+exports[`Marker should render last Marker 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "borderColor": "black",
+        "borderRadius": 20,
+        "borderWidth": 4,
+        "fontSize": 1,
+        "height": 40,
+        "justifyContent": "center",
+        "position": "relative",
+        "width": 40,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "rgba(0, 0, 0, 1)",
+          "fontWeight": "bold",
+          "position": "relative",
+          "zIndex": 1,
+        }
+      }
+    >
+      0
+    </Text>
+    <View
+      style={
+        Object {
+          "backgroundColor": "black",
+          "borderRadius": 20,
+          "height": 40,
+          "position": "absolute",
+          "transform": Array [
+            Object {
+              "scale": 0,
+            },
+          ],
+          "width": 40,
+        }
+      }
+    />
+  </View>
+</View>
+`;
