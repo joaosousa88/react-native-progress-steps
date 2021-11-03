@@ -2,6 +2,20 @@
 
 A lightweight and simple React Native component that tracks your progress by steps.
 
+![example 1](https://res.cloudinary.com/dwdhvtj90/image/upload/v1635955323/github/example-1.gif)
+
+## Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Properties](#properties)
+  * [ProgressSteps](#progresssteps)
+    + [Steps array model](#steps-array-model)
+    + [Colors customization model](#colors-customization-model)
+- [Demos](#demos)
+- [Contributing](#contributing)
+- [License](#license)
+
 ## Installation
 
 Using yarn:
@@ -43,6 +57,51 @@ const [step, setStep] = useState(0);
 
 ```
 
+If you want to customize, you can use the property `colors` following the structure on the example below: 
+
+```js
+import ProgressSteps, { Title, Content } from '@joaosousa/react-native-progress-steps';
+
+const [step, setStep] = useState(0);
+
+<ProgressSteps
+  currentStep={step}
+  steps={[
+    {
+      id: /* Your id */,
+      title: <Title>{/* Your title */}</Title>,
+      content: <Content>{/* Your content */}</Content>,
+    },
+    {
+      id: /* Your id */,
+      title: <Title>{/* Your title */}</Title>,
+      content: <Content>{/* Your content */}</Content>,
+    },
+  ]}
+  colors={{
+    title: {
+      text: {
+        normal: '#94d2bd',
+        active: '#005f73',
+        completed: '#005f73',
+      },
+    },
+    marker: {
+      text: {
+        normal: '#94d2bd',
+        active: '#005f73',
+        completed: '#f4f3ee',
+      },
+      line: {
+        normal: '#94d2bd',
+        active: '#005f73',
+        completed: '#005f73',
+      },
+    },
+  }}
+/>
+```
+
 Or, alternatively, with your own custom components:
 
 ```js
@@ -76,7 +135,7 @@ To help you make visual changes, the property `stepState` will be automatically 
 
 ```js
 {
-  index: number;
+  stepIndex: number;
   isActive: boolean;
   isCompleted: boolean;
   isFirst: boolean;
@@ -110,6 +169,7 @@ export default CustomTitle;
 | currentStep | The index of the currently active step | none    | Number                      | No       |
 | steps       | List of steps                          | none    | [Array](#steps-array-model) | No       |
 | marker      | Custom step identifier                 | Marker  | ReactElement                | Yes      |
+| colors      | Property that let you add customization| none    | [Object](#colors-customization-model) | Yes   |
 
 #### Steps array model
 
@@ -124,9 +184,39 @@ export default CustomTitle;
 ]
 ```
 
-## Demo
+#### Colors customization model
 
-![/example](https://res.cloudinary.com/dwdhvtj90/image/upload/v1634760093/github/screen-1.gif)
+```js
+{
+  title?: {
+    text: {
+      normal: string,
+      active: string,
+      completed: string
+    }
+  },
+  marker?: {
+    text: {
+      normal: string,
+      active: string,
+      completed: string
+    },
+    line: {
+      normal: string,
+      active: string,
+      completed: string
+    }
+  }
+}
+
+```
+
+## Demos
+
+| Example 1 | Example 2 | Example 3 |
+| --- | --- | --- |
+| ![example 1](https://res.cloudinary.com/dwdhvtj90/image/upload/v1635955323/github/example-1.gif) | ![example 2](https://res.cloudinary.com/dwdhvtj90/image/upload/v1635955315/github/example-2.gif) | ![example 3](https://res.cloudinary.com/dwdhvtj90/image/upload/v1635955314/github/example-3.gif) |
+| [example/src/examples/Example1](example/src/examples/Example1) | [example/src/examples/Example2](example/src/examples/Example2) | [example/src/examples/Example3](example/src/examples/Example3) |
 
 ## Contributing
 

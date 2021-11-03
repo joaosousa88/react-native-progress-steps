@@ -1,17 +1,19 @@
+import { DEFAULT_COLORS, EASING } from '../constants';
+import React, { FC, memo, useCallback, useEffect, useRef } from 'react';
+
 import { Animated } from 'react-native';
-import { EASING } from '../constants';
-import React, { FC, memo, useEffect, useRef } from 'react';
-import styles from './Title.styles';
 import type { ITitle } from './Title.types';
+import styles from './Title.styles';
 
 const Title: FC<ITitle> = ({
   children,
   stepState: { isActive, isCompleted, isFirstInteraction } = {},
+  colors: { text: { normal, active, completed } } = DEFAULT_COLORS.title,
 }) => {
-  const animation = useRef(new Animated.Value(0)).current;
+  const colorAnimation = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
-    Animated.timing(animation, {
+    Animated.timing(colorAnimation, {
       toValue: isActive || isCompleted ? 1 : 0,
       duration: 400,
       easing: EASING,
@@ -19,22 +21,26 @@ const Title: FC<ITitle> = ({
     }).start();
   }, [isActive, isCompleted]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const getColor = React.useCallback(() => {
+  const getColor = useCallback(() => {
     if (isFirstInteraction) {
-      if (isCompleted || isActive) {
-        return 'black';
+      if (isActive) {
+        return active;
       }
 
-      return 'gray';
+      if (isCompleted) {
+        return completed;
+      }
+
+      return normal;
     }
 
     if (isCompleted) {
-      return 'black';
+      return completed;
     }
 
-    return animation.interpolate({
+    return colorAnimation.interpolate({
       inputRange: [0, 1],
-      outputRange: ['gray', 'black'],
+      outputRange: [normal, active],
     });
   }, [isFirstInteraction, isCompleted, isActive]); // eslint-disable-line react-hooks/exhaustive-deps
 

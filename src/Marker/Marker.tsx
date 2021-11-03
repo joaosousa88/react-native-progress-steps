@@ -1,11 +1,22 @@
-import React, { FC, memo, useEffect, useRef } from 'react';
 import { Animated, View } from 'react-native';
-import styles from './Marker.styles';
+import { DEFAULT_COLORS, EASING } from '../constants';
+import React, { FC, memo, useEffect, useRef } from 'react';
+
 import type { IMarker } from './Marker.types';
-import { EASING } from '../constants';
+import styles from './Marker.styles';
 
 const Marker: FC<IMarker> = ({
-  stepState: { index, isCompleted, isActive, isLast, isFirstInteraction } = {},
+  stepState: {
+    stepIndex = 0,
+    isCompleted,
+    isActive,
+    isLast,
+    isFirstInteraction,
+  } = {},
+  colors: {
+    text = DEFAULT_COLORS.marker.text,
+    line = DEFAULT_COLORS.marker.line,
+  } = {},
 }) => {
   const scaleAnimation = useRef(new Animated.Value(0)).current;
   const borderColorAnimation = useRef(new Animated.Value(0)).current;
@@ -43,19 +54,21 @@ const Marker: FC<IMarker> = ({
 
   const borderColor =
     isFirstInteraction && isActive
-      ? 'black'
+      ? line.completed
       : borderColorAnimation.interpolate({
           inputRange: [0, 1],
-          outputRange: ['gray', 'black'],
+          outputRange: [line.normal, line.completed],
         });
 
-  const color =
-    isFirstInteraction && isCompleted
-      ? 'white'
-      : scaleAnimation.interpolate({
-          inputRange: [0, 1],
-          outputRange: ['black', 'white'],
-        });
+  const getColor = () => {
+    if (isCompleted) {
+      return text.completed;
+    } else if (isActive) {
+      return text.active;
+    } else {
+      return text.normal;
+    }
+  };
 
   const scale = isFirstInteraction && isCompleted ? 1 : scaleAnimation;
 
@@ -70,16 +83,21 @@ const Marker: FC<IMarker> = ({
   return (
     <View style={styles.container}>
       <Animated.View style={[styles.circle, { borderColor }]}>
-        <Animated.Text style={[styles.circleText, { color }]}>
-          {index}
+        <Animated.Text style={[styles.circleText, { color: getColor() }]}>
+          {stepIndex + 1}
         </Animated.Text>
         <Animated.View
-          style={[styles.circleInner, { transform: [{ scale }] }]}
+          style={[
+            styles.circleInner,
+            { backgroundColor: line.active, transform: [{ scale }] },
+          ]}
         />
       </Animated.View>
       {!isLast && (
-        <View style={styles.bar}>
-          <Animated.View style={[styles.barInner, { height }]} />
+        <View style={[styles.bar, { backgroundColor: line.normal }]}>
+          <Animated.View
+            style={[styles.barInner, { backgroundColor: line.active, height }]}
+          />
         </View>
       )}
     </View>
@@ -90,7 +108,7 @@ export default memo(
   Marker,
   (prevProps, nextProps) =>
     prevProps.stepState?.isActive === nextProps.stepState?.isActive &&
-    prevProps.stepState?.index === nextProps.stepState?.index &&
+    prevProps.stepState?.stepIndex === nextProps.stepState?.stepIndex &&
     prevProps.stepState?.isCompleted === nextProps.stepState?.isCompleted &&
     prevProps.stepState?.isLast === nextProps.stepState?.isLast
 );

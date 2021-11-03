@@ -12,7 +12,7 @@ exports[`Marker should render Marker 1`] = `
     style={
       Object {
         "alignItems": "center",
-        "borderColor": "black",
+        "borderColor": "#000000",
         "borderRadius": 20,
         "borderWidth": 4,
         "fontSize": 1,
@@ -26,19 +26,19 @@ exports[`Marker should render Marker 1`] = `
     <Text
       style={
         Object {
-          "color": "rgba(0, 0, 0, 1)",
+          "color": "#000000",
           "fontWeight": "bold",
           "position": "relative",
           "zIndex": 1,
         }
       }
     >
-      0
+      1
     </Text>
     <View
       style={
         Object {
-          "backgroundColor": "black",
+          "backgroundColor": "#000000",
           "borderRadius": 20,
           "height": 40,
           "position": "absolute",
@@ -54,19 +54,23 @@ exports[`Marker should render Marker 1`] = `
   </View>
   <View
     style={
-      Object {
-        "alignSelf": "center",
-        "backgroundColor": "gray",
-        "flex": 1,
-        "position": "relative",
-        "width": 4,
-      }
+      Array [
+        Object {
+          "alignSelf": "center",
+          "flex": 1,
+          "position": "relative",
+          "width": 4,
+        },
+        Object {
+          "backgroundColor": "#a4a4a4",
+        },
+      ]
     }
   >
     <View
       style={
         Object {
-          "backgroundColor": "black",
+          "backgroundColor": "#000000",
           "height": "0%",
           "width": 4,
         }
@@ -88,7 +92,7 @@ exports[`Marker should render last Marker 1`] = `
     style={
       Object {
         "alignItems": "center",
-        "borderColor": "black",
+        "borderColor": "#000000",
         "borderRadius": 20,
         "borderWidth": 4,
         "fontSize": 1,
@@ -102,19 +106,19 @@ exports[`Marker should render last Marker 1`] = `
     <Text
       style={
         Object {
-          "color": "rgba(0, 0, 0, 1)",
+          "color": "#000000",
           "fontWeight": "bold",
           "position": "relative",
           "zIndex": 1,
         }
       }
     >
-      0
+      1
     </Text>
     <View
       style={
         Object {
-          "backgroundColor": "black",
+          "backgroundColor": "#000000",
           "borderRadius": 20,
           "height": 40,
           "position": "absolute",

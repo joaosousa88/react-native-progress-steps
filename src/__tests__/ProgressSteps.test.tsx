@@ -1,25 +1,40 @@
-import React from 'react';
-import { render } from '@testing-library/react-native';
+import Content from '../Content';
 import ProgressSteps from '../';
+import React from 'react';
 import { Text } from 'react-native';
-// import type { IstepState } from '../ProgressSteps.types';
+import Title from '../Title';
+import { render } from '@testing-library/react-native';
 
-const Component = ({ children }: { children: React.ReactNode }) => (
-  <Text>{children}</Text>
-);
-
-const CustomMarker = ({ stepState: { index } = {} }: { stepState?: any }) => (
-  <Text>Custom marker {index}</Text>
-);
+const CustomMarker = ({
+  stepState: { stepIndex } = {},
+}: {
+  stepState?: any;
+}) => <Text>Custom marker {stepIndex + 1}</Text>;
 
 const steps = [
   {
-    title: <Component>Title 1</Component>,
-    content: <Text>Content 1</Text>,
+    title: <Title>Title 1</Title>,
+    content: (
+      <Content>
+        <Text>Content 1</Text>
+      </Content>
+    ),
   },
   {
-    title: <Component>Title 2</Component>,
-    content: <Text>Content 2</Text>,
+    title: <Title>Title 2</Title>,
+    content: (
+      <Content>
+        <Text>Content 2</Text>
+      </Content>
+    ),
+  },
+  {
+    title: <Title>Title 3</Title>,
+    content: (
+      <Content>
+        <Text>Content 3</Text>
+      </Content>
+    ),
   },
 ];
 
@@ -40,8 +55,8 @@ describe('ProgressSteps', () => {
       <ProgressSteps currentStep={0} steps={steps} />
     );
 
-    expect(queryByText('0')).toBeTruthy();
     expect(queryByText('1')).toBeTruthy();
+    expect(queryByText('2')).toBeTruthy();
   });
 
   it('should render custom Marker', () => {
@@ -49,8 +64,8 @@ describe('ProgressSteps', () => {
       <ProgressSteps marker={<CustomMarker />} currentStep={0} steps={steps} />
     );
 
-    expect(queryByText('Custom marker 0')).toBeTruthy();
     expect(queryByText('Custom marker 1')).toBeTruthy();
+    expect(queryByText('Custom marker 2')).toBeTruthy();
   });
 
   it('should render without first content', () => {
@@ -59,10 +74,10 @@ describe('ProgressSteps', () => {
         currentStep={0}
         steps={[
           {
-            title: <Component>Title 1</Component>,
+            title: <Title>Title 1</Title>,
           },
           {
-            title: <Component>Title 2</Component>,
+            title: <Title>Title 2</Title>,
             content: <Text>Content 2</Text>,
           },
         ]}
@@ -73,5 +88,38 @@ describe('ProgressSteps', () => {
     expect(queryByText('Content 1')).toBeFalsy();
     expect(queryByText('Title 2')).toBeTruthy();
     expect(queryByText('Content 2')).toBeTruthy();
+  });
+
+  it('should render with custom colors', () => {
+    const { queryByText } = render(
+      <ProgressSteps
+        currentStep={1}
+        steps={steps}
+        colors={{
+          title: {
+            text: { normal: 'yellow', active: 'red', completed: 'blue' },
+          },
+          marker: {
+            text: {
+              normal: 'yellow',
+              active: 'red',
+              completed: 'blue',
+            },
+            line: {
+              normal: 'yellow',
+              active: 'red',
+              completed: 'blue',
+            },
+          },
+        }}
+      />
+    );
+
+    expect(queryByText('1').props.style.color).toEqual('blue');
+    expect(queryByText('Title 1').props.style.color).toEqual('blue');
+    expect(queryByText('2').props.style.color).toEqual('red');
+    expect(queryByText('Title 2').props.style.color).toEqual('red');
+    expect(queryByText('3').props.style.color).toEqual('yellow');
+    expect(queryByText('Title 3').props.style.color).toEqual('yellow');
   });
 });
