@@ -1,21 +1,29 @@
-import React, { FC, memo, useEffect, useState, cloneElement } from 'react';
-import { View } from 'react-native';
-import Marker from './Marker';
-import styles from './ProgressSteps.styles';
 import type { IProgressSteps, IstepState } from './ProgressSteps.types';
+import React, { FC, cloneElement, memo, useEffect, useState } from 'react';
 
-const ProgressSteps: FC<IProgressSteps> = ({ currentStep, steps, marker }) => {
+import Marker from './Marker';
+import { View } from 'react-native';
+import styles from './ProgressSteps.styles';
+
+const ProgressSteps: FC<IProgressSteps> = ({
+  currentStep,
+  steps,
+  marker,
+  colors,
+}) => {
   const [isFirstInteraction, setIsFirstInteraction] = useState(true);
 
   useEffect(() => {
-    if (isFirstInteraction) setIsFirstInteraction(false);
-  }, [currentStep]); // eslint-disable-line react-hooks/exhaustive-deps
+    if (isFirstInteraction) {
+      setIsFirstInteraction(false);
+    }
+  }, [currentStep, isFirstInteraction]);
 
   return (
     <View style={styles.container}>
       {steps.map(({ id, title, content }, index) => {
         const stepState: IstepState = {
-          index,
+          stepIndex: index,
           isActive: index === currentStep,
           isCompleted: index < currentStep,
           isFirst: index === 0,
@@ -27,13 +35,22 @@ const ProgressSteps: FC<IProgressSteps> = ({ currentStep, steps, marker }) => {
           <View key={id ?? index} style={styles.step}>
             <View style={styles.left}>
               {marker ? (
-                cloneElement(marker, { stepState })
+                cloneElement(marker, {
+                  stepState,
+                  colors: colors?.marker,
+                  ...marker.props,
+                })
               ) : (
-                <Marker stepState={stepState} />
+                <Marker stepState={stepState} colors={colors?.marker} />
               )}
             </View>
             <View style={styles.right}>
-              {title && cloneElement(title, { stepState })}
+              {title &&
+                cloneElement(title, {
+                  stepState,
+                  colors: colors?.title,
+                  ...title.props,
+                })}
               {content && cloneElement(content, { stepState })}
             </View>
           </View>

@@ -1,19 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Title should render Title 1`] = `
-<View>
-  <Text
-    style={
-      Object {
-        "color": "black",
-        "fontWeight": "bold",
-        "paddingBottom": 12,
-        "paddingLeft": 5,
-        "paddingTop": 12,
-      }
+<Text
+  style={
+    Object {
+      "color": "#000000",
+      "fontWeight": "bold",
+      "paddingBottom": 12,
+      "paddingLeft": 5,
+      "paddingTop": 12,
     }
-  >
-    Hello title
-  </Text>
-</View>
+  }
+>
+  Hello title
+</Text>
 `;

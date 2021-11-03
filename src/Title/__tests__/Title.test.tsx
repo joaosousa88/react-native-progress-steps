@@ -3,7 +3,7 @@ import Title from '../';
 import { render } from '@testing-library/react-native';
 
 const stepState = {
-  index: 0,
+  stepIndex: 0,
   isActive: true,
   isCompleted: false,
   isFirst: true,

@@ -1,10 +1,10 @@
-import React from 'react';
 import Content from '..';
-import { render } from '@testing-library/react-native';
+import React from 'react';
 import { Text } from 'react-native';
+import { render } from '@testing-library/react-native';
 
 const stepState = {
-  index: 0,
+  stepIndex: 0,
   isActive: true,
   isCompleted: false,
   isFirst: true,

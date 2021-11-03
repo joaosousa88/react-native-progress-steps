@@ -10,6 +10,7 @@ exports[`Title should render Title 1`] = `
       "overflow": "hidden",
       "paddingBottom": 20,
       "paddingLeft": 5,
+      "width": "100%",
     }
   }
 >
@@ -18,6 +19,7 @@ exports[`Title should render Title 1`] = `
     style={
       Object {
         "position": "absolute",
+        "width": "100%",
       }
     }
   >
