@@ -1,3 +1,5 @@
+import type React from 'react';
+
 export interface IProgressSteps {
   currentStep: number;
   marker?: React.ReactElement;
