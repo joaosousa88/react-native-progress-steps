@@ -3,18 +3,18 @@ import React, { FC, memo, useState } from 'react';
 import Svg, { Path } from 'react-native-svg';
 
 import { COLORS } from './constants';
-import { IsetState } from '@joaosousa/react-native-progress-steps';
+import type { IstepState } from '@joaosousa/react-native-progress-steps';
 import Loading from './Loading';
 
 interface IMarker {
-  stepState?: IsetState;
+  stepState?: IstepState;
   isFetching: boolean;
 }
 
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 
 const Marker: FC<IMarker> = ({
-  stepState: { stepIndex, isCompleted, isActive } = {},
+  stepState: { stepIndex = 0, isCompleted, isActive } = {},
   isFetching,
 }) => {
   const isLoading = isFetching && isActive;
@@ -108,7 +108,7 @@ export default memo(
   Marker,
   (prevProps, nextProps) =>
     prevProps.isFetching === nextProps.isFetching &&
-    prevProps.stepState?.index === nextProps.stepState?.index &&
+    prevProps.stepState?.stepIndex === nextProps.stepState?.stepIndex &&
     prevProps.stepState?.isActive === nextProps.stepState?.isActive &&
     prevProps.stepState?.isCompleted === nextProps.stepState?.isCompleted
 );

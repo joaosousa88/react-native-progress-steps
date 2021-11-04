@@ -1,15 +1,27 @@
 import { Button, StyleSheet, Text, View } from 'react-native';
+import {
+  NativeStackScreenProps,
+  createNativeStackNavigator,
+} from '@react-navigation/native-stack';
 
 import Example1 from './examples/Example1';
 import Example2 from './examples/Example2';
 import Example3 from './examples/Example3';
 import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-const Stack = createNativeStackNavigator();
+type RootStackParamList = {
+  Examples: undefined;
+  Example1: undefined;
+  Example2: undefined;
+  Example3: undefined;
+};
 
-function HomeScreen({ navigation }) {
+type HomeScreenProps = NativeStackScreenProps<RootStackParamList, 'Examples'>;
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
+
+function HomeScreen({ navigation }: HomeScreenProps) {
   return (
     <View style={styles.container}>
       <Text>List of examples:</Text>

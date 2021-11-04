@@ -1,12 +1,22 @@
 import { Animated, StyleSheet, View } from 'react-native';
-import React, { useEffect, useRef } from 'react';
+import React, { FC, useEffect, useRef } from 'react';
 
-const hexToRgba = (hex, alpha = 1) => {
-  const [r, g, b] = hex.match(/\w\w/g).map((x) => parseInt(x, 16));
+const hexToRgba = (hex: string, alpha: number = 1) => {
+  const match = hex.match(/\w\w/g);
+
+  if (match === null) return;
+
+  const [r, g, b] = match.map((x) => parseInt(x, 16));
+
   return `rgba(${r},${g},${b},${alpha})`;
 };
 
-const Loading = ({ color, size = 40 }) => {
+interface ILoading {
+  color: string;
+  size?: number;
+}
+
+const Loading: FC<ILoading> = ({ color, size = 40 }) => {
   const rotationAnimation = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {

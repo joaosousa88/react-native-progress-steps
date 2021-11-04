@@ -2,7 +2,7 @@ import { Animated, LayoutChangeEvent, StyleSheet } from 'react-native';
 import React, { FC, memo, useEffect, useRef, useState } from 'react';
 
 import { CUSHION } from './constants';
-import { IstepState } from '@joaosousa/react-native-progress-steps';
+import type { IstepState } from '@joaosousa/react-native-progress-steps';
 
 export interface IContent {
   children: React.ReactElement | React.ReactElement[];
@@ -61,7 +61,7 @@ const Content: FC<IContent> = ({
         });
   const translateY =
     isFirstInteraction && isActive
-      ? '0'
+      ? 0
       : translateAnimation.interpolate({
           inputRange: [0, 1],
           outputRange: [50, 0],
