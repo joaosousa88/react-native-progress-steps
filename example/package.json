@@ -1,6 +1,6 @@
 {
   "name": "@joaosousa/react-native-progress-steps-example",
-  "description": "Example app for @joaosousa/react-native-progress-steps",
+  "description": "Examples for @joaosousa/react-native-progress-steps",
   "version": "0.0.1",
   "private": true,
   "main": "index",
@@ -14,22 +14,23 @@
   "dependencies": {
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/native-stack": "^6.2.5",
-    "expo": "^42.0.0",
-    "expo-splash-screen": "~0.11.2",
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
-    "react-native": "0.63.4",
-    "react-native-screens": "^3.8.0",
+    "expo": "^43.0.1",
+    "expo-splash-screen": "~0.13.5",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-native": "0.64.2",
+    "react-native-safe-area-context": "^3.3.2",
+    "react-native-screens": "^3.9.0",
     "react-native-svg": "^12.1.1",
-    "react-native-unimodules": "~0.14.5",
-    "react-native-web": "~0.13.12",
+    "react-native-unimodules": "~0.14.10",
+    "react-native-web": "~0.17.5",
     "rn-placeholder": "^3.0.3"
   },
   "devDependencies": {
-    "@babel/core": "~7.9.0",
-    "@babel/runtime": "^7.9.6",
+    "@babel/core": "~7.16.0",
+    "@babel/runtime": "^7.16.0",
     "babel-plugin-module-resolver": "^4.0.0",
-    "babel-preset-expo": "8.3.0",
-    "expo-cli": "^4.0.13"
+    "babel-preset-expo": "8.5.1",
+    "expo-cli": "4.12.11"
   }
 }
