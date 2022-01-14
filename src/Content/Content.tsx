@@ -3,10 +3,11 @@ import React, { FC, memo, useEffect, useRef, useState } from 'react';
 
 import { EASING } from '../constants';
 import type { IContent } from './Content.types';
-import styles from './Content.styles';
+import useStyles from './Content.styles';
 
 const Content: FC<IContent> = ({
   children,
+  orientation,
   stepState: { isActive, isFirstInteraction } = {},
 }) => {
   const [contentHeight, setContentHeight] = useState(0);
@@ -50,7 +51,7 @@ const Content: FC<IContent> = ({
           inputRange: [0, 1],
           outputRange: [0, contentHeight],
         });
-
+  const styles = useStyles(orientation);
   return (
     <Animated.View
       pointerEvents={isActive ? 'auto' : 'none'}

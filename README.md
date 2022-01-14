@@ -3,15 +3,16 @@
 A lightweight and simple React Native component that tracks your progress by steps.
 
 ![example 1](https://res.cloudinary.com/dwdhvtj90/image/upload/v1635955323/github/example-1.gif)
+![example horizontal](https://res.cloudinary.com/dwdhvtj90/image/upload/v1639762623/github/example-horizontal.gif)
 
 ## Table of Contents
 
 - [Installation](#installation)
 - [Usage](#usage)
 - [Properties](#properties)
-  * [ProgressSteps](#progresssteps)
-    + [Steps array model](#steps-array-model)
-    + [Colors customization model](#colors-customization-model)
+  - [ProgressSteps](#progresssteps)
+    - [Steps array model](#steps-array-model)
+    - [Colors customization model](#colors-customization-model)
 - [Demos](#demos)
 - [Contributing](#contributing)
 - [License](#license)
@@ -57,7 +58,7 @@ const [step, setStep] = useState(0);
 
 ```
 
-If you want to customize, you can use the property `colors` following the structure on the example below: 
+If you want to customize, you can use the property `colors` following the structure on the example below:
 
 ```js
 import ProgressSteps, { Title, Content } from '@joaosousa/react-native-progress-steps';
@@ -164,12 +165,13 @@ export default CustomTitle;
 
 ### ProgressSteps
 
-| Name        | Description                            | Default | Type                        | Optional |
-| ----------- | -------------------------------------- | ------- | --------------------------- | -------- |
-| currentStep | The index of the currently active step | none    | Number                      | No       |
-| steps       | List of steps                          | none    | [Array](#steps-array-model) | No       |
-| marker      | Custom step identifier                 | Marker  | ReactElement                | Yes      |
-| colors      | Property that let you add customization| none    | [Object](#colors-customization-model) | Yes   |
+| Name        | Description                                    | Default    | Type                                  | Optional |
+| ----------- | ---------------------------------------------- | ---------- | ------------------------------------- | -------- |
+| currentStep | The index of the currently active step         | none       | Number                                | No       |
+| steps       | List of steps                                  | none       | [Array](#steps-array-model)           | No       |
+| orientation | Support for vertical or horizontal orientation | 'vertical' | String                                | Yes      |
+| marker      | Custom step identifier                         | Marker     | ReactElement                          | Yes      |
+| colors      | Property that let you add customization        | none       | [Object](#colors-customization-model) | Yes      |
 
 #### Steps array model
 
@@ -213,10 +215,10 @@ export default CustomTitle;
 
 ## Demos
 
-| Example 1 | Example 2 | Example 3 |
-| --- | --- | --- |
+| Example 1                                                                                        | Example 2                                                                                        | Example 3                                                                                        |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
 | ![example 1](https://res.cloudinary.com/dwdhvtj90/image/upload/v1635955323/github/example-1.gif) | ![example 2](https://res.cloudinary.com/dwdhvtj90/image/upload/v1635955315/github/example-2.gif) | ![example 3](https://res.cloudinary.com/dwdhvtj90/image/upload/v1635955314/github/example-3.gif) |
-| [example/src/examples/Example1](example/src/examples/Example1) | [example/src/examples/Example2](example/src/examples/Example2) | [example/src/examples/Example3](example/src/examples/Example3) |
+| [example/src/examples/Example1](example/src/examples/Example1)                                   | [example/src/examples/Example2](example/src/examples/Example2)                                   | [example/src/examples/Example3](example/src/examples/Example3)                                   |
 
 ## Contributing
 

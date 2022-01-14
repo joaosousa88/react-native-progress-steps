@@ -1,6 +1,9 @@
 import type React from 'react';
 
+export type Torientation = 'vertical' | 'horizontal';
+
 export interface IProgressSteps {
+  orientation?: Torientation;
   currentStep: number;
   marker?: React.ReactElement;
   steps: {
@@ -23,6 +26,12 @@ export interface IstepState {
   isLast: boolean;
 }
 
+interface Icolors {
+  normal: string;
+  active: string;
+  completed: string;
+}
+
 export interface ItitleColors {
   text: Icolors;
 }
@@ -30,10 +39,4 @@ export interface ItitleColors {
 export interface ImarkerColors {
   text: Icolors;
   line: Icolors;
-}
-
-interface Icolors {
-  normal: string;
-  active: string;
-  completed: string;
 }
