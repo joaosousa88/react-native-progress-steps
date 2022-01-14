@@ -1,16 +1,11 @@
-import type { IProgressSteps, IstepState } from './ProgressSteps.types';
-import React, { FC, cloneElement, memo, useEffect, useState } from 'react';
+import React, { FC, memo, useEffect, useState } from 'react';
 
-import Marker from './Marker';
-import { View } from 'react-native';
-import styles from './ProgressSteps.styles';
+import Horizontal from './Horizontal';
+import type { IProgressSteps } from './ProgressSteps.types';
+import Vertical from './Vertical';
 
-const ProgressSteps: FC<IProgressSteps> = ({
-  currentStep,
-  steps,
-  marker,
-  colors,
-}) => {
+const ProgressSteps: FC<IProgressSteps> = (props) => {
+  const { currentStep, orientation } = props;
   const [isFirstInteraction, setIsFirstInteraction] = useState(true);
 
   useEffect(() => {
@@ -19,50 +14,20 @@ const ProgressSteps: FC<IProgressSteps> = ({
     }
   }, [currentStep, isFirstInteraction]);
 
-  return (
-    <View style={styles.container}>
-      {steps.map(({ id, title, content }, index) => {
-        const stepState: IstepState = {
-          stepIndex: index,
-          isActive: index === currentStep,
-          isCompleted: index < currentStep,
-          isFirst: index === 0,
-          isFirstInteraction,
-          isLast: index === steps.length - 1,
-        };
+  const newProps = {
+    ...props,
+    isFirstInteraction,
+  };
 
-        return (
-          <View key={id ?? index} style={styles.step}>
-            <View style={styles.left}>
-              {marker ? (
-                cloneElement(marker, {
-                  stepState,
-                  colors: colors?.marker,
-                  ...marker.props,
-                })
-              ) : (
-                <Marker stepState={stepState} colors={colors?.marker} />
-              )}
-            </View>
-            <View style={styles.right}>
-              {title &&
-                cloneElement(title, {
-                  stepState,
-                  colors: colors?.title,
-                  ...title.props,
-                })}
-              {content && cloneElement(content, { stepState })}
-            </View>
-          </View>
-        );
-      })}
-    </View>
-  );
+  if (orientation === 'horizontal') return <Horizontal {...newProps} />;
+
+  return <Vertical {...newProps} />;
 };
 
 export default memo(
   ProgressSteps,
   (prevProps, nextProps) =>
     prevProps.steps === nextProps.steps &&
+    prevProps.orientation === nextProps.orientation &&
     prevProps.currentStep === nextProps.currentStep
 );

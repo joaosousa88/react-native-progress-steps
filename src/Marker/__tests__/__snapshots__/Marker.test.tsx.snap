@@ -2,6 +2,7 @@
 
 exports[`Marker should render Marker 1`] = `
 <View
+  onLayout={[Function]}
   style={
     Object {
       "flex": 1,
@@ -20,6 +21,7 @@ exports[`Marker should render Marker 1`] = `
         "justifyContent": "center",
         "position": "relative",
         "width": 40,
+        "zIndex": 1,
       }
     }
   >
@@ -60,10 +62,12 @@ exports[`Marker should render Marker 1`] = `
           "flex": 1,
           "position": "relative",
           "width": 4,
+          "zIndex": 0,
         },
         Object {
           "backgroundColor": "#a4a4a4",
         },
+        false,
       ]
     }
   >
@@ -82,6 +86,7 @@ exports[`Marker should render Marker 1`] = `
 
 exports[`Marker should render last Marker 1`] = `
 <View
+  onLayout={[Function]}
   style={
     Object {
       "flex": 1,
@@ -100,6 +105,7 @@ exports[`Marker should render last Marker 1`] = `
         "justifyContent": "center",
         "position": "relative",
         "width": 40,
+        "zIndex": 1,
       }
     }
   >

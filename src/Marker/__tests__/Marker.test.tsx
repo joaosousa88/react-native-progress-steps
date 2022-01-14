@@ -13,14 +13,19 @@ const stepState = {
 
 describe('Marker', () => {
   it('should render Marker', () => {
-    const { queryByText, toJSON } = render(<Marker stepState={stepState} />);
+    const { queryByText, toJSON } = render(
+      <Marker stepState={stepState} orientation="vertical" />
+    );
 
     expect(queryByText('1')).toBeTruthy();
     expect(toJSON()).toMatchSnapshot();
   });
   it('should render last Marker', () => {
     const { toJSON } = render(
-      <Marker stepState={{ ...stepState, isLast: true }} />
+      <Marker
+        stepState={{ ...stepState, isLast: true }}
+        orientation="vertical"
+      />
     );
 
     expect(toJSON()).toMatchSnapshot();

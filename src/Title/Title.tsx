@@ -1,14 +1,15 @@
-import { DEFAULT_COLORS, EASING } from '../constants';
+import { DEFAULT_COLORS, DEFAULT_ORIENTATION, EASING } from '../constants';
 import React, { FC, memo, useCallback, useEffect, useRef } from 'react';
 
 import { Animated } from 'react-native';
 import type { ITitle } from './Title.types';
-import styles from './Title.styles';
+import useStyles from './Title.styles';
 
 const Title: FC<ITitle> = ({
   children,
-  stepState: { isActive, isCompleted, isFirstInteraction } = {},
   colors: { text: { normal, active, completed } } = DEFAULT_COLORS.title,
+  orientation = DEFAULT_ORIENTATION,
+  stepState: { isActive, isCompleted, isFirstInteraction } = {},
 }) => {
   const colorAnimation = useRef(new Animated.Value(0)).current;
 
@@ -43,6 +44,8 @@ const Title: FC<ITitle> = ({
       outputRange: [normal, active],
     });
   }, [isFirstInteraction, isCompleted, isActive]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const styles = useStyles(orientation);
 
   return (
     <Animated.Text style={[styles.text, { color: getColor() }]}>

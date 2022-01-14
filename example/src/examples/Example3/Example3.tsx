@@ -1,4 +1,4 @@
-import { Button, ScrollView, StyleSheet, View } from 'react-native';
+import { Body, Row, Spacer } from '../../components';
 import {
   Fade,
   Placeholder,
@@ -7,10 +7,10 @@ import {
 } from 'rn-placeholder';
 import React, { useState } from 'react';
 
+import { Button } from 'react-native';
 import Content from './components/Content';
 import Marker from './components/Marker';
 import ProgressSteps from '@joaosousa/react-native-progress-steps';
-import Space from './components/Space';
 import Title from './components/Title';
 
 export default () => {
@@ -39,24 +39,24 @@ export default () => {
             <PlaceholderLine width={90} />
             <PlaceholderLine width={35} />
           </Placeholder>
-          <Space direction="column" />
+          <Spacer space="10" />
           <Placeholder Left={PlaceholderMedia} Animation={Fade}>
             <PlaceholderLine width={70} />
             <PlaceholderLine />
             <PlaceholderLine width={80} />
             <PlaceholderLine width={30} />
           </Placeholder>
-          <Space direction="column" />
+          <Spacer space="10" />
           <Placeholder Left={PlaceholderMedia} Animation={Fade}>
             <PlaceholderLine width={40} />
             <PlaceholderLine />
             <PlaceholderLine width={90} />
             <PlaceholderLine width={35} />
           </Placeholder>
-          <Space direction="column" />
-          <View style={styles.actionsWrapper}>
+          <Spacer space="10" />
+          <Row>
             <Button title="Next step" onPress={() => handleNextStep(400)} />
-          </View>
+          </Row>
         </Content>
       ),
     },
@@ -70,12 +70,12 @@ export default () => {
             <PlaceholderLine width={80} />
             <PlaceholderLine width={30} />
           </Placeholder>
-          <Space direction="column" />
-          <View style={styles.actionsWrapper}>
+          <Spacer space="10" />
+          <Row>
             <Button title="Next step" onPress={() => handleNextStep()} />
-            <Space />
+            <Spacer orientation="h" space="10" />
             <Button title="Prev step" onPress={() => handlePrevStep()} />
-          </View>
+          </Row>
         </Content>
       ),
     },
@@ -88,18 +88,18 @@ export default () => {
             <PlaceholderLine width={80} />
             <PlaceholderLine width={30} />
           </Placeholder>
-          <Space direction="column" />
+          <Spacer space="10" />
           <Placeholder Left={PlaceholderMedia} Animation={Fade}>
             <PlaceholderLine />
             <PlaceholderLine width={50} />
             <PlaceholderLine width={20} />
           </Placeholder>
-          <Space direction="column" />
-          <View style={styles.actionsWrapper}>
+          <Spacer space="10" />
+          <Row>
             <Button title="Next step" onPress={() => handleNextStep(500)} />
-            <Space />
+            <Spacer orientation="h" space="10" />
             <Button title="Prev step" onPress={() => handlePrevStep()} />
-          </View>
+          </Row>
         </Content>
       ),
     },
@@ -113,73 +113,43 @@ export default () => {
             <PlaceholderLine width={90} />
             <PlaceholderLine width={35} />
           </Placeholder>
-          <Space direction="column" />
+          <Spacer space="10" />
           <Placeholder Left={PlaceholderMedia} Animation={Fade}>
             <PlaceholderLine width={70} />
             <PlaceholderLine />
             <PlaceholderLine width={80} />
             <PlaceholderLine width={30} />
           </Placeholder>
-          <Space direction="column" />
+          <Spacer space="10" />
           <Placeholder Left={PlaceholderMedia} Animation={Fade}>
             <PlaceholderLine width={40} />
             <PlaceholderLine />
             <PlaceholderLine width={90} />
             <PlaceholderLine width={35} />
           </Placeholder>
-          <Space direction="column" />
-          <Space direction="column" />
+          <Spacer space="20" />
           <Placeholder Animation={Fade}>
             <PlaceholderLine width={70} />
             <PlaceholderLine />
             <PlaceholderLine width={80} />
             <PlaceholderLine width={30} />
           </Placeholder>
-          <Space direction="column" />
-          <View style={styles.actionsWrapper}>
+          <Spacer space="10" />
+          <Row>
             <Button title="Prev step" onPress={() => handlePrevStep()} />
-          </View>
+          </Row>
         </Content>
       ),
     },
   ];
 
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <ProgressSteps
-          marker={<Marker isFetching={isFetching} />}
-          currentStep={currrentStep}
-          steps={steps}
-        />
-      </View>
-    </ScrollView>
+    <Body>
+      <ProgressSteps
+        marker={<Marker isFetching={isFetching} />}
+        currentStep={currrentStep}
+        steps={steps}
+      />
+    </Body>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    margin: 'auto',
-    paddingTop: 50,
-    paddingRight: 10,
-    paddingBottom: 20,
-    paddingLeft: 10,
-    width: '100%',
-    maxWidth: 400,
-  },
-  actionsWrapper: {
-    flexDirection: 'row',
-    paddingTop: 10,
-    paddingBottom: 10,
-  },
-  touchable: {
-    backgroundColor: 'black',
-    padding: 10,
-  },
-  touchableText: {
-    color: 'white',
-  },
-  touchableSpacer: {
-    marginRight: 10,
-  },
-});

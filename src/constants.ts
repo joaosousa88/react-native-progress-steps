@@ -1,5 +1,9 @@
 import { Easing } from 'react-native';
 
+export const ORIENTATION_VERTICAL = 'vertical';
+export const ORIENTATION_HORIZONTAL = 'horizontal';
+export const DEFAULT_ORIENTATION = ORIENTATION_VERTICAL;
+
 export const EASING = Easing.bezier(0.76, 0, 0.24, 1);
 
 export const DEFAULT_COLORS = {

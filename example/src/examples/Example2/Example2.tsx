@@ -1,25 +1,33 @@
+import { Body, RadioButtons, Row, Spacer, Touchable } from '../../components';
 import ProgressSteps, {
   Content,
   Title,
 } from '@joaosousa/react-native-progress-steps';
 import React, { useState } from 'react';
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+
+import { Text } from 'react-native';
 
 export default () => {
+  const orientations = ['vertical', 'horizontal'];
   const [currrentStep, setCurrentStep] = useState(0);
+  const [orientation, setOrientation] = useState(orientations[0]);
 
-  const handleNextStep = () => {
+  const handleNextStep = () => () => {
     setCurrentStep(currrentStep + 1);
   };
 
-  const handlePrevStep = () => {
+  const handlePrevStep = () => () => {
     setCurrentStep(currrentStep - 1);
+  };
+
+  const handleSelectOrientation = (item) => {
+    if (item === orientation) return;
+    setOrientation(item);
+  };
+
+  const touchableColors = {
+    color: '#f4f3ee',
+    backgroundColor: '#005f73',
   };
 
   const steps = [
@@ -43,14 +51,14 @@ export default () => {
             ornare. Ut accumsan nulla ac lacinia volutpat. Aliquam a ultrices
             nisl.
           </Text>
-          <View style={styles.touchables}>
-            <TouchableOpacity
-              style={[styles.touchable, styles.touchableSpacer]}
-              onPress={() => handleNextStep()}
-            >
-              <Text style={styles.touchableText}>Next step</Text>
-            </TouchableOpacity>
-          </View>
+          <Spacer space="10" />
+          <Row>
+            <Touchable
+              label="Next step"
+              onPress={handleNextStep()}
+              colors={touchableColors}
+            />
+          </Row>
         </Content>
       ),
     },
@@ -64,20 +72,20 @@ export default () => {
             malesuada, arcu sem lacinia metus, vitae tristique velit purus eget
             elit. Integer tristique ligula sit amet malesuada aliquam.
           </Text>
-          <View style={styles.touchables}>
-            <TouchableOpacity
-              style={[styles.touchable, styles.touchableSpacer]}
-              onPress={() => handleNextStep()}
-            >
-              <Text style={styles.touchableText}>Next step</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.touchable}
-              onPress={() => handlePrevStep()}
-            >
-              <Text style={styles.touchableText}>Prev step</Text>
-            </TouchableOpacity>
-          </View>
+          <Spacer space="10" />
+          <Row>
+            <Touchable
+              label="Next step"
+              onPress={handleNextStep()}
+              colors={touchableColors}
+            />
+            <Spacer orientation="h" space="10" />
+            <Touchable
+              label="Prev step"
+              onPress={handlePrevStep()}
+              colors={touchableColors}
+            />
+          </Row>
         </Content>
       ),
     },
@@ -99,20 +107,20 @@ export default () => {
             efficitur nisi dignissim. Fusce finibus vulputate posuere. Nulla sit
             amet sem nec diam feugiat hendrerit.
           </Text>
-          <View style={styles.touchables}>
-            <TouchableOpacity
-              style={[styles.touchable, styles.touchableSpacer]}
-              onPress={() => handleNextStep()}
-            >
-              <Text style={styles.touchableText}>Next step</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.touchable}
-              onPress={() => handlePrevStep()}
-            >
-              <Text style={styles.touchableText}>Prev step</Text>
-            </TouchableOpacity>
-          </View>
+          <Spacer space="10" />
+          <Row>
+            <Touchable
+              label="Next step"
+              onPress={handleNextStep()}
+              colors={touchableColors}
+            />
+            <Spacer orientation="h" space="10" />
+            <Touchable
+              label="Prev step"
+              onPress={handlePrevStep()}
+              colors={touchableColors}
+            />
+          </Row>
         </Content>
       ),
     },
@@ -127,74 +135,55 @@ export default () => {
             elit. Integer tristique ligula sit amet malesuada aliquam. Mauris
             pulvinar sapien semper metus vehicula congue.
           </Text>
-          <View style={styles.touchables}>
-            <TouchableOpacity
-              style={styles.touchable}
-              onPress={() => handlePrevStep()}
-            >
-              <Text style={styles.touchableText}>Prev step</Text>
-            </TouchableOpacity>
-          </View>
+          <Spacer space="10" />
+          <Row>
+            <Touchable
+              label="Prev step"
+              onPress={handlePrevStep()}
+              colors={touchableColors}
+            />
+          </Row>
         </Content>
       ),
     },
   ];
 
   return (
-    <ScrollView>
-      <View style={styles.container}>
-        <ProgressSteps
-          currentStep={currrentStep}
-          steps={steps}
-          colors={{
-            title: {
-              text: {
-                normal: '#94d2bd',
-                active: '#005f73',
-                completed: '#005f73',
-              },
+    <Body>
+      <Text>Select orientation:</Text>
+      <Spacer space="5" />
+      <RadioButtons
+        data={orientations}
+        selected={orientation}
+        handleSelect={handleSelectOrientation}
+      />
+      <Spacer space="30" />
+      <ProgressSteps
+        orientation={orientation}
+        currentStep={currrentStep}
+        steps={steps}
+        colors={{
+          title: {
+            text: {
+              normal: '#94d2bd',
+              active: '#005f73',
+              completed: '#005f73',
             },
-            marker: {
-              text: {
-                normal: '#94d2bd',
-                active: '#005f73',
-                completed: '#f4f3ee',
-              },
-              line: {
-                normal: '#94d2bd',
-                active: '#005f73',
-                completed: '#005f73',
-              },
+          },
+          marker: {
+            text: {
+              normal: '#94d2bd',
+              active: '#005f73',
+              completed: '#f4f3ee',
             },
-          }}
-        />
-      </View>
-    </ScrollView>
+            line: {
+              normal: '#94d2bd',
+              active: '#005f73',
+              completed: '#005f73',
+            },
+          },
+        }}
+      />
+    </Body>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    margin: 'auto',
-    paddingTop: 50,
-    paddingRight: 10,
-    paddingBottom: 20,
-    paddingLeft: 10,
-    width: '100%',
-    maxWidth: 400,
-  },
-  touchables: {
-    flexDirection: 'row',
-    paddingTop: 10,
-  },
-  touchable: {
-    backgroundColor: '#005f73',
-    padding: 10,
-  },
-  touchableText: {
-    color: '#f4f3ee',
-  },
-  touchableSpacer: {
-    marginRight: 10,
-  },
-});

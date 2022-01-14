@@ -1,7 +1,18 @@
-import type { IstepState, ItitleColors } from '../ProgressSteps.types';
+import type {
+  IstepState,
+  ItitleColors,
+  Torientation,
+} from '../ProgressSteps.types';
 
 export interface ITitle {
   children: string;
-  stepState?: IstepState;
   colors?: ItitleColors;
+  orientation?: Torientation;
+  stepState?: IstepState;
 }
+
+export type Tstyles = {
+  [key: string]: {
+    [key: string]: {};
+  };
+};

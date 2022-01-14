@@ -1,37 +1,41 @@
-import { Animated, View } from 'react-native';
+import { Animated, LayoutChangeEvent, View } from 'react-native';
 import { DEFAULT_COLORS, EASING } from '../constants';
-import React, { FC, memo, useEffect, useRef } from 'react';
+import React, { FC, memo, useEffect, useRef, useState } from 'react';
+import useStyles, { circleSize } from './Marker.styles';
 
 import type { IMarker } from './Marker.types';
-import styles from './Marker.styles';
+import { ORIENTATION_HORIZONTAL } from '../constants';
 
 const Marker: FC<IMarker> = ({
-  stepState: {
-    stepIndex = 0,
-    isCompleted,
-    isActive,
-    isLast,
-    isFirstInteraction,
-  } = {},
   colors: {
-    text = DEFAULT_COLORS.marker.text,
     line = DEFAULT_COLORS.marker.line,
+    text = DEFAULT_COLORS.marker.text,
+  } = {},
+  orientation,
+  stepState: {
+    isActive,
+    isCompleted,
+    isFirstInteraction,
+    isLast,
+    stepIndex = 0,
   } = {},
 }) => {
-  const scaleAnimation = useRef(new Animated.Value(0)).current;
+  const [widthContainer, setWidthContainer] = useState(0);
+
+  const barAnimation = useRef(new Animated.Value(0)).current;
   const borderColorAnimation = useRef(new Animated.Value(0)).current;
-  const heightAnimation = useRef(new Animated.Value(0)).current;
+  const scaleAnimation = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     Animated.parallel(
       [
-        Animated.timing(isCompleted ? scaleAnimation : heightAnimation, {
+        Animated.timing(isCompleted ? scaleAnimation : barAnimation, {
           toValue: isCompleted ? 1 : 0,
           duration: 300,
           easing: EASING,
           useNativeDriver: false,
         }),
-        Animated.timing(isCompleted ? heightAnimation : scaleAnimation, {
+        Animated.timing(isCompleted ? barAnimation : scaleAnimation, {
           toValue: isCompleted ? 1 : 0,
           duration: 300,
           delay: 150,
@@ -72,16 +76,26 @@ const Marker: FC<IMarker> = ({
 
   const scale = isFirstInteraction && isCompleted ? 1 : scaleAnimation;
 
-  const height =
+  const barInterpolate =
     isFirstInteraction && isCompleted
       ? '100%'
-      : heightAnimation.interpolate({
+      : barAnimation.interpolate({
           inputRange: [0, 1],
           outputRange: ['0%', '100%'],
         });
 
+  const handleOnLayout = (el: LayoutChangeEvent) => {
+    if (orientation !== ORIENTATION_HORIZONTAL) return;
+
+    const { width } = el.nativeEvent.layout;
+
+    setWidthContainer(width);
+  };
+
+  const styles = useStyles(orientation);
+
   return (
-    <View style={styles.container}>
+    <View onLayout={handleOnLayout} style={styles.container}>
       <Animated.View style={[styles.circle, { borderColor }]}>
         <Animated.Text style={[styles.circleText, { color: getColor() }]}>
           {stepIndex + 1}
@@ -94,9 +108,29 @@ const Marker: FC<IMarker> = ({
         />
       </Animated.View>
       {!isLast && (
-        <View style={[styles.bar, { backgroundColor: line.normal }]}>
+        <View
+          style={[
+            styles.bar,
+            { backgroundColor: line.normal },
+            orientation === ORIENTATION_HORIZONTAL && {
+              transform: [
+                {
+                  translateX: widthContainer / 2,
+                },
+              ],
+              backgroundColor: line.normal,
+              width: widthContainer - circleSize,
+            },
+          ]}
+        >
           <Animated.View
-            style={[styles.barInner, { backgroundColor: line.active, height }]}
+            style={[
+              styles.barInner,
+              { backgroundColor: line.active },
+              orientation === ORIENTATION_HORIZONTAL
+                ? { width: barInterpolate }
+                : { height: barInterpolate },
+            ]}
           />
         </View>
       )}
@@ -108,7 +142,7 @@ export default memo(
   Marker,
   (prevProps, nextProps) =>
     prevProps.stepState?.isActive === nextProps.stepState?.isActive &&
-    prevProps.stepState?.stepIndex === nextProps.stepState?.stepIndex &&
     prevProps.stepState?.isCompleted === nextProps.stepState?.isCompleted &&
-    prevProps.stepState?.isLast === nextProps.stepState?.isLast
+    prevProps.stepState?.isLast === nextProps.stepState?.isLast &&
+    prevProps.stepState?.stepIndex === nextProps.stepState?.stepIndex
 );
