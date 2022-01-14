@@ -1,6 +1,6 @@
 {
   "name": "@joaosousa/react-native-progress-steps",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "A lightweight and simple React Native component that tracks your progress by steps.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
